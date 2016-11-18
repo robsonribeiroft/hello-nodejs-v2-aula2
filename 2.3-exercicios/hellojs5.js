@@ -11,7 +11,7 @@ let nomeArquivo;
 function getNomeArquivo(){
   rl.question("Escolha o nome do arquivo:\n", (line)=>{
     nomeArquivo = line;
-    rl.close();
+    getPaises(3);
   });
 }
 
@@ -21,17 +21,16 @@ function getPaises(count){
       paises.push(line);
       getPaises(count);
     });
-  } else{
-    getNomeArquivo();
-    gravaArquivo()
-  }
+  } else
+    gravaArquivo();
 }
 
 function gravaArquivo(){
   for (var i in paises)
     fs.appendFile(nomeArquivo+".txt", paises[i]+"\n");
 
+  rl.close();
   console['log'](`Arquivo ${nomeArquivo} salvo!`);
 }
 
-getPaises(3);
+getNomeArquivo();
